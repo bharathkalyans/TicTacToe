@@ -5,9 +5,9 @@ public class TicTacToe {
     /*The Below two ArrayList contains the list of Positions Played by the Player and CPU respectively.
      * Making it static and declaring it global  makes sure that all methods can have access to it.
      */
-    static ArrayList<Integer> playerPositions1 = new ArrayList<>();
-    static ArrayList<Integer> playerPositions2 = new ArrayList<>();
-    static ArrayList<Integer> cpuPositions = new ArrayList<>();
+    private static final ArrayList<Integer> playerPositions1 = new ArrayList<>();
+    private static final ArrayList<Integer> playerPositions2 = new ArrayList<>();
+    private static final ArrayList<Integer> cpuPositions = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println("Welcome to Tic Tac Toe!!");
@@ -35,8 +35,8 @@ public class TicTacToe {
                 playerPosition = scan.nextInt();
             }
             while (playerPositions1.contains(playerPosition) ||
-                   playerPositions2.contains(playerPosition) ||
-                   cpuPositions.contains(playerPosition)
+                    playerPositions2.contains(playerPosition) ||
+                    cpuPositions.contains(playerPosition)
             ) {
                 System.out.println("Position Taken!!, Enter a different Position");
                 playerPosition = scan.nextInt();
@@ -63,7 +63,7 @@ public class TicTacToe {
                     playerPosition2 = scan.nextInt();
                 }
                 placePiece(gameBoard, playerPosition2, "Player2");
-            }else {
+            } else {
                 //CPU's Snippet!
                 Random rand = new Random();
                 int cpuPosition = rand.nextInt(9) + 1;
@@ -81,7 +81,7 @@ public class TicTacToe {
         }
     }
 
-    public static String checkWinner() {
+    private static String checkWinner() {
 
         /*
          * Contains the list of all Winning Outcomes.
@@ -98,7 +98,7 @@ public class TicTacToe {
         List<Integer> cross2 = Arrays.asList(3, 5, 7);
 
         //PreProcessing reduces our Time Complexity issues.
-        List<List> winning = new ArrayList<>();
+        List<List<Integer>> winning = new ArrayList<>();
         winning.add(topRow);
         winning.add(botRow);
         winning.add(midRow);
@@ -108,23 +108,23 @@ public class TicTacToe {
         winning.add(cross1);
         winning.add(cross2);
 
-        for (List l : winning) {
+        for (List<Integer> l : winning) {
             if (playerPositions1.containsAll(l)) {
                 return "Congratulations Player1 Won!!";
             } else if (playerPositions2.containsAll(l)) {
                 return "Congratulations Player2 Won!!";
             } else if (cpuPositions.containsAll(l)) {
                 return "CPU Wins!!  :( !";
-            } else if (playerPositions1.size() + playerPositions2.size() +cpuPositions.size() == 9) {
+            } else if (playerPositions1.size() + playerPositions2.size() + cpuPositions.size() == 9) {
                 return "Hey,it's 'TIE' ";
             }
         }
         return "";
     }
 
-    public static void placePiece(char[][] gameBoard, int position, String user) {
+    private static void placePiece(char[][] gameBoard, int position, String user) {
         //Places the Symbol('X'/'O') in the desired Position.
-        char symbol = 'X';
+        char symbol = ' ';
         switch (user) {
             case "Player1":
                 symbol = 'X';
@@ -173,7 +173,7 @@ public class TicTacToe {
         }
     }
 
-    public static void printGameBoard(char[][] gameBoard) {
+    private static void printGameBoard(char[][] gameBoard) {
         //This Method print's out the GameBoard.
         for (char[] row : gameBoard) {
             for (char c : row) {
