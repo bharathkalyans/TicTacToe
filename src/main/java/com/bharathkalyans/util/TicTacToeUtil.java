@@ -1,4 +1,4 @@
-package util;
+package com.bharathkalyans.util;
 
 public final class TicTacToeUtil {
 
